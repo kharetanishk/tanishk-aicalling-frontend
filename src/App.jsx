@@ -1,20 +1,21 @@
 import "./css/App.css";
 import "./css/index.css";
 import tanupic from "./assets/tanuai.png";
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { BsLayoutSidebar } from "react-icons/bs";
-import { RecoilRoot, useRecoilState } from "recoil";
+import { MdCancel } from "react-icons/md";
+import { RecoilRoot, useRecoilState, useSetRecoilState } from "recoil";
 import { toggleAtomstate } from "./states/atoms";
+import CallerTab from "./components/Call";
 
-// ✅ App wrapped in RecoilRoot at the top level
 function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<CallerTab />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
@@ -22,30 +23,59 @@ function App() {
 }
 
 const Layout = () => {
-  const [issidebarOpen, settoggleSidebar] = useRecoilState(toggleAtomstate);
-  const togglesidebar = () => settoggleSidebar((prev) => !prev);
+  const [isSidebarOpen, setToggleSidebar] = useRecoilState(toggleAtomstate);
+  const toggleSidebar = () => setToggleSidebar((prev) => !prev);
 
   return (
-    <div className="layout-container">
-      <div className="navbar">
-        <button className="sidebar-btn" onClick={togglesidebar}>
-          <BsLayoutSidebar />
-        </button>
-        <p className="appname">Tanishk AI</p>
-        <div className="photo-container">
-          <img className="profile-pic" src={tanupic} alt="profilepic" />
+    <div className="mobile-frame">
+      <div className="app-container">
+        <div className="navbar">
+          <div className="navbar-left">
+            {!isSidebarOpen && (
+              <button className="sidebar-btn" onClick={toggleSidebar}>
+                <BsLayoutSidebar />
+              </button>
+            )}
+          </div>
+
+          <p className="appname">Tanishk AI</p>
+
+          <div className="navbar-right">
+            <div className="photo-container">
+              <img className="profile-pic" src={tanupic} alt="profilepic" />
+            </div>
+          </div>
         </div>
+
+        {isSidebarOpen && (
+          <>
+            <Sidebar closeSidebar={toggleSidebar} />
+            <div className="overlay" onClick={toggleSidebar}></div>
+          </>
+        )}
+        <Outlet />
       </div>
-      <div className={`sidebar ${issidebarOpen ? "open" : ""}`}>
-        <button className="sidebar-btn" onClick={togglesidebar}></button>
-      </div>
-      {issidebarOpen && <Sidebar />}
     </div>
   );
 };
 
 const Sidebar = () => {
-  return <div className="sidebar">hello world</div>;
+  const setToggleSidebar = useSetRecoilState(toggleAtomstate);
+
+  const closeSidebar = () => {
+    setToggleSidebar((prev) => !prev);
+  };
+
+  return (
+    <div className="sidebar">
+      <button className="closesidebar" onClick={closeSidebar}>
+        <MdCancel />
+      </button>
+      <div className="sidebar-content">
+        <h2>Hello, Tanishk!</h2>
+      </div>
+    </div>
+  );
 };
 
 export default App;

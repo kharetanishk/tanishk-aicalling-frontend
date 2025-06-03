@@ -1,0 +1,16 @@
+.caller-tab-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  padding: 0.5rem;
+  background-color: #0d131f;
+}
+
+.caller-image {
+  border: none;
+  width: 100%;
+  max-width: 300px;
+  object-fit: cover;
+  overflow: hidden;
+}

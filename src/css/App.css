@@ -1,70 +1,149 @@
-/* css for mobile phones */
+/* Reset & base */
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #0d131f;
+  color: white;
+}
+.mobile-frame {
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #0d131f;
+  position: relative;
+}
+
+/* Lock app width to mobile size on tablets/laptops/desktops */
+@media screen and (min-width: 768px) {
+  .mobile-frame {
+    max-width: 500px;
+    height: 100vh;
+    margin: 0 auto;
+    border-radius: 20px;
+    border: 10px solid #222;
+    box-shadow: 0 0 20px rgba(138, 128, 235, 0.388);
+    overflow: hidden;
+    position: relative;
+    background-color: #0d131f; /* Outer phone bezel look */
+  }
+}
+/* App Container */
+.app-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Navbar */
 .navbar {
+  position: relative;
+  border: none;
+  z-index: 1001;
+  height: 60px;
+  background-color: #0d131f;
   display: flex;
   align-items: center;
-  color: white;
   justify-content: space-between;
-  padding: 5px;
+  padding: 0.4em;
 }
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 70%;
-  max-width: 300px;
-  height: 100vh;
-  background-color: #343541;
-  color: white;
-  padding: 20px;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
-  transform: translateX(-100%);
-  transition: transform 0.3s ease-in-out;
-  z-index: 1000;
+.navbar-left,
+.navbar-right {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-/* When sidebar is open */
-.sidebar.open {
-  transform: translateX(0);
-}
-
-/* Sidebar button styles */
+/* Sidebar button */
 .sidebar-btn {
-  font-size: 24px;
   background: none;
   border: none;
   color: white;
+  font-size: 24px;
   cursor: pointer;
-  padding: 10px;
-  z-index: 1100; /* Above the sidebar */
 }
 
-/* Hide the button when sidebar is open */
-.sidebar-btn.hide {
-  display: none;
-}
+/* App name */
 .appname {
-  font-size: 20px;
-  margin-bottom: 6px;
+  font-size: 22px;
   padding: 7px;
-  border-radius: 8px;
-  background-color: rgba(104, 104, 106, 0.3);
+  border-radius: 12px;
+  background-color: rgba(58, 58, 58, 0.7);
 }
+
+/* Profile picture */
 .photo-container {
-  margin-right: 2.1px;
-  padding: 2px;
+  width: 35px;
+  height: 35px;
 }
 .profile-pic {
-  width: 40px;
-  height: 37px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border: 0.2px solid white;
-  box-shadow: 0.6px 0.7px 0.5px 0.6px#6c6d7a;
+  border-radius: 50%;
+}
+
+/* Sidebar */
+.sidebar {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #213056;
+  padding: 1rem;
+  z-index: 1002;
+  animation: slideIn 0.4s ease-out forwards;
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+/* Close button inside sidebar */
+.closesidebar {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  float: right;
   cursor: pointer;
-  margin-bottom: 2px;
+  animation: slideout 0.4s ease-in backwards;
+}
+
+/* Sidebar Content */
+.sidebar-content {
+  margin-top: 2rem;
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0d131f;
+  z-index: 1000;
 }
