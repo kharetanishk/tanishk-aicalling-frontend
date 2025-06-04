@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import centrepic from "../assets/callpic.jpg";
 import "../css/Call.css";
 import { IoCallSharp } from "react-icons/io5";
@@ -28,15 +29,25 @@ export const CallerTab = () => {
   );
 };
 export const Loader = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/callinginterface");
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [navigate]);
   return (
     <>
-      <h1
-        style={{
-          color: "white",
-        }}
-      >
-        hello world
-      </h1>
+      <h1>Calling Tanishk's Ai.......</h1>
+    </>
+  );
+};
+export const CallingInterface = () => {
+  return (
+    <>
+      <h1>This component will contain the calling interface</h1>
     </>
   );
 };

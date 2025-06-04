@@ -41,3 +41,8 @@
   transform: scale(1.05) skew(20);
   font-weight: bolder;
 }
+.call-button:active {
+  background-color: rgba(14, 221, 239, 255);
+  box-shadow: 1px 1px 10px 1px rgba(26, 86, 132, 0.3);
+  color: black;
+}
