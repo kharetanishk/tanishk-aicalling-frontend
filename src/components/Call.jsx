@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import centrepic from "../assets/callpic.jpg";
 import "../css/Call.css";
 import { IoCallSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import callertune from "../assets/callertune.mp3";
 
 const CallingApp = () => {
   return (
@@ -30,17 +31,30 @@ export const CallerTab = () => {
 };
 export const Loader = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const audio = new Audio(callertune);
+    audio.loop = true;
+    audio.play();
+
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/callinginterface");
-    }, 4000);
+    }, 7000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
   return (
     <>
-      <h1>Calling Tanishk's Ai.......</h1>
+      <div className="loader-container">
+        <div className="spinner" />
+        <p>Connecting to Tanishk’s AI...</p>
+      </div>
     </>
   );
 };
