@@ -6,7 +6,8 @@ import { BsLayoutSidebar } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 import { RecoilRoot, useRecoilState, useSetRecoilState } from "recoil";
 import { toggleAtomstate } from "./states/atoms";
-import CallerTab from "./components/Call";
+import CallingApp from "./components/Call";
+import { Loader } from "./components/Call";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<CallerTab />} />
+            <Route index element={<CallingApp />} />
+            <Route path="/calling" element={<Loader />} />
           </Route>
         </Routes>
       </BrowserRouter>
