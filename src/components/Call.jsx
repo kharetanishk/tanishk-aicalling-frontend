@@ -31,12 +31,16 @@ export const CallerTab = () => {
 };
 export const Loader = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
     const audio = new Audio(callertune);
     audio.loop = true;
-    audio.play();
+    const timer = setInterval(() => {
+      audio.play();
+    }, 600);
 
     return () => {
+      clearInterval(timer);
       audio.pause();
       audio.currentTime = 0;
     };
@@ -45,7 +49,7 @@ export const Loader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/callinginterface");
-    }, 7000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
@@ -58,11 +62,5 @@ export const Loader = () => {
     </>
   );
 };
-export const CallingInterface = () => {
-  return (
-    <>
-      <h1>This component will contain the calling interface</h1>
-    </>
-  );
-};
+
 export default CallingApp;

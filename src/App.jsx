@@ -6,7 +6,8 @@ import { BsLayoutSidebar } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 import { RecoilRoot, useRecoilState, useSetRecoilState } from "recoil";
 import { toggleAtomstate } from "./states/atoms";
-import CallingApp, { CallingInterface, Loader } from "./components/Call";
+import CallingApp, { Loader } from "./components/Call";
+import CallingInterface from "./components/Callinterface";
 
 function App() {
   return (
