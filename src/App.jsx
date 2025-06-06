@@ -8,6 +8,7 @@ import { RecoilRoot, useRecoilState, useSetRecoilState } from "recoil";
 import { toggleAtomstate } from "./states/atoms";
 import CallingApp, { Loader } from "./components/Call";
 import CallingInterface from "./components/Callinterface";
+import TextChat from "./components/Test";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route index element={<CallingApp />} />
             <Route path="/calling" element={<Loader />} />
             <Route path="/callinginterface" element={<CallingInterface />} />
+            <Route path="/chat" element={<TextChat />} />
           </Route>
         </Routes>
       </BrowserRouter>

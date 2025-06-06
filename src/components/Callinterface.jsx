@@ -6,9 +6,12 @@ import { MdCallEnd } from "react-icons/md";
 import { FaMicrophone } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const CallingInterface = () => {
   const [isspeakerOn, setSpeaker] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (isspeakerOn) {
       const timer = setTimeout(() => {
@@ -17,9 +20,12 @@ const CallingInterface = () => {
 
       return () => clearTimeout(timer);
     }
-  });
+  }, [isspeakerOn]);
   const handleclick = () => {
     setSpeaker((prev) => !prev);
+  };
+  const navigatetotest = () => {
+    navigate("/chat");
   };
 
   return (
@@ -36,7 +42,7 @@ const CallingInterface = () => {
           <button className="endcall-button">
             <MdCallEnd />
           </button>
-          <button className="mic-button">
+          <button className="mic-button" onClick={navigatetotest}>
             <FaMicrophone />
           </button>
         </div>
