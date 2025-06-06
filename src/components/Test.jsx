@@ -10,10 +10,9 @@ const TextChat = () => {
       const res = await axios.post("http://localhost:1601/chat", {
         userMessage,
       });
-      console.log(res);
       setResponse(res.data.response);
     } catch (error) {
-      console.error("Error:", error.response.data || error.message || error);
+      console.error("Error:", error.message);
       setResponse("Something went wrong.+ in the response");
     }
   };
