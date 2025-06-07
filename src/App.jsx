@@ -9,6 +9,7 @@ import { toggleAtomstate } from "./states/atoms";
 import CallingApp, { Loader } from "./components/Call";
 import CallingInterface from "./components/Callinterface";
 import TextChat from "./components/Test";
+import ThankYou from "./components/Thankyou";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/calling" element={<Loader />} />
             <Route path="/callinginterface" element={<CallingInterface />} />
             <Route path="/chat" element={<TextChat />} />
+            <Route path="/thankyou" element={<ThankYou />} />
           </Route>
         </Routes>
       </BrowserRouter>
