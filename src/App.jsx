@@ -1,7 +1,7 @@
 import "./css/App.css";
 import "./css/index.css";
 import tanupic from "./assets/tanuai.png";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, Link } from "react-router-dom";
 import { BsLayoutSidebar } from "react-icons/bs";
 import { MdCancel } from "react-icons/md";
 import { RecoilRoot, useRecoilState, useSetRecoilState } from "recoil";
@@ -9,8 +9,9 @@ import { toggleAtomstate } from "./states/atoms";
 import CallingApp, { Loader } from "./components/Call";
 import CallingInterface from "./components/Callinterface";
 import { useState } from "react";
-import TextChat from "./components/Test";
 import ThankYou from "./components/Thankyou";
+import { Aboutproject } from "./components/About";
+import Chatinterface from "./components/Chatinterface";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
             <Route index element={<CallingApp />} />
             <Route path="/calling" element={<Loader />} />
             <Route path="/callinginterface" element={<CallingInterface />} />
-            <Route path="/chat" element={<TextChat />} />
+            <Route path="/chat" element={<Chatinterface />} />
             <Route path="/thankyou" element={<ThankYou />} />
+            <Route path="/aboutproject" element={<Aboutproject />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -30,7 +32,7 @@ function App() {
   );
 }
 
-const Layout = () => {
+export const Layout = () => {
   const [isSidebarOpen, setToggleSidebar] = useRecoilState(toggleAtomstate);
   const toggleSidebar = () => setToggleSidebar((prev) => !prev);
 
@@ -74,7 +76,7 @@ const Sidebar = () => {
     setclosing(true);
     setTimeout(() => {
       setToggleSidebar(false);
-    }, 400);
+    }, 300);
   };
 
   return (
@@ -82,8 +84,21 @@ const Sidebar = () => {
       <button className="closesidebar" onClick={handleClose}>
         <MdCancel />
       </button>
-      <div className="sidebar-content">
-        <h2>Hello, Tanishk!</h2>
+      <div className="sidebar-content-container">
+        <div className="sidebar-content">
+          <ul>
+            <li>
+              <Link to="/" onClick={handleClose}>
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/chat" onClick={handleClose}>
+                Chatinterface
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

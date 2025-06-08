@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const TextChat = () => {
+const Chatinterface = () => {
   const [userMessage, setUserMessage] = useState("");
   const [response, setResponse] = useState("");
 
@@ -37,4 +37,4 @@ const TextChat = () => {
   );
 };
 
-export default TextChat;
+export default Chatinterface;

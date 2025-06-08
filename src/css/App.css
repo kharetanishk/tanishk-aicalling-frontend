@@ -108,11 +108,11 @@ body {
 
 /* Animation classes */
 .slide-in {
-  animation: slideIn 0.4s ease-out forwards;
+  animation: slideIn 0.3s ease-out forwards;
 }
 
 .slide-out {
-  animation: slideOut 0.4s ease-in forwards;
+  animation: slideOut 0.3s ease-in forwards;
 }
 
 @keyframes slideIn {
@@ -144,8 +144,26 @@ body {
 }
 
 /* Content */
-.sidebar-content {
-  margin-top: 2rem;
+.sidebar-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 5px;
+}
+.sidebar-content a {
+  display: flex;
+
+  color: white;
+  text-decoration: none;
+}
+.sidebar-content ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
 }
 
 /* Overlay */
