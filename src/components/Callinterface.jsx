@@ -46,7 +46,7 @@ const CallingInterface = () => {
 
       greetSpeech.onend = () => {
         console.log("Greeting done, starting mic...");
-        setResponse("🎤 Tap the mic to ask your question.");
+        startListening();
       };
 
       speechSynthesis.speak(greetSpeech);
@@ -151,56 +151,60 @@ const CallingInterface = () => {
   const handleclick = () => {
     setSpeaker((prev) => !prev);
   };
-  const navigatetochat = () => {
-    navigate("/chat");
-  };
 
   return (
     <>
-      <div className="call-container">
-        {/* {console.log("app is rendering")} */}
-        {isLoading ? (
-          <div className="ai-loader">
-            <p>🤖 Thinking...</p>
-            <div className="spinner"></div>
+      <div className="callapp-wrapper">
+        <div className="call-container">
+          {/* {console.log("app is rendering")} */}
+          {isLoading ? (
+            <div className="ai-loader">
+              <p>🤖 Thinking...</p>
+              <div className="spinner"></div>
+            </div>
+          ) : (
+            <MemoizedLottie animationData={talkinginterface} />
+          )}
+          <Timer />
+          <div className="timer-container">
+            <p className="timer">
+              <FormatTime />
+            </p>
           </div>
-        ) : (
-          <MemoizedLottie animationData={talkinginterface} />
-        )}
-        <Timer />
-        <div className="timer-container">
-          <p className="timer">
-            <FormatTime />
-          </p>
-        </div>
-        <div className="control-buttons">
-          <button className="call-speaker" onClick={handleclick}>
-            <HiSpeakerWave />
-          </button>
-          <button
-            className="endcall-button"
-            onClick={() => {
-              navigate("/thankyou", {
-                state: { time: document.querySelector(".timer").textContent },
-              });
-            }}
-          >
-            <MdCallEnd />
-          </button>
-          <button
-            className="mic-button"
-            onClick={() => {
-              if (!isListening) startListening();
-            }}
-          >
-            {isListening ? (
-              <span className="mic-listening">
-                <RiSpeakFill />
-              </span>
-            ) : (
-              <FaMicrophone />
-            )}
-          </button>
+          <div className="control-area">
+            <div className="control-buttons">
+              <button className="call-speaker" onClick={handleclick}>
+                <HiSpeakerWave />
+              </button>
+              <button
+                className="endcall-button"
+                onClick={() => {
+                  navigate("/thankyou", {
+                    state: {
+                      time: document.querySelector(".timer").textContent,
+                    },
+                  });
+                }}
+              >
+                <MdCallEnd />
+              </button>
+              <button
+                className="mic-button"
+                onClick={() => {
+                  if (!isListening) startListening();
+                }}
+              >
+                {isListening ? (
+                  <span className="mic-listening">
+                    <RiSpeakFill />
+                  </span>
+                ) : (
+                  <FaMicrophone />
+                )}
+              </button>
+            </div>
+            {isspeakerOn && <Speakererror />}
+          </div>
         </div>
         {isspeakerOn && <Speakererror />}
       </div>

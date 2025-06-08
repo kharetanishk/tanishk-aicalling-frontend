@@ -5,9 +5,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 100vh;
   padding: 0.5rem;
   background-color: #0d131f;
+  border: 0.1px solid white;
+  overflow: hidden;
 }
 
 .caller-image {

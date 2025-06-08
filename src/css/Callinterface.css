@@ -1,10 +1,22 @@
+.callapp-wrapper {
+  border: 0.1px solid rgb(182, 179, 179);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .call-container {
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 89vh;
+  height: 90vh;
   padding: 30px;
   background-color: #0d131f;
   position: relative;
@@ -15,7 +27,7 @@
   height: 250px;
   border-radius: 50%;
   border: none;
-  padding: 0px;
+  padding: 7px;
 }
 .timer-container {
   display: flex;
@@ -72,7 +84,7 @@
 /* Specific button styles */
 .call-speaker {
   background-color: #0d131f;
-  color: #67c7d0;
+  color: #87cfd5;
 }
 
 .endcall-button {
@@ -93,48 +105,34 @@
   height: 70px;
 }
 
-.Speaker-error-message-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 4px;
-  width: 100%;
+.control-area {
   position: relative;
-  bottom: 0;
-  left: 0;
-  padding: 5px;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.Speaker-error-message-container {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  background-color: #1a1a1f;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: #c5c7c9;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  font-size: 14px;
+  width: 100%;
 }
 .error-message {
   font-weight: bold;
   color: rgb(166, 168, 169);
 }
-/* .chat-container {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px;
-  gap: 2px;
-  font-size: 17px;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: rgb(200, 199, 199);
-  margin-right: 5px;
-  cursor: pointer;
-}
-.chat-button {
-  background-color: #0d131f;
-  color: rgb(200, 199, 199);
-  width: 20px;
-  height: 20px;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-} */
+
 .ai-loader {
   display: flex;
   justify-content: center;

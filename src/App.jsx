@@ -8,6 +8,7 @@ import { RecoilRoot, useRecoilState, useSetRecoilState } from "recoil";
 import { toggleAtomstate } from "./states/atoms";
 import CallingApp, { Loader } from "./components/Call";
 import CallingInterface from "./components/Callinterface";
+import { useState } from "react";
 import TextChat from "./components/Test";
 import ThankYou from "./components/Thankyou";
 
@@ -68,14 +69,17 @@ const Layout = () => {
 
 const Sidebar = () => {
   const setToggleSidebar = useSetRecoilState(toggleAtomstate);
-
-  const closeSidebar = () => {
-    setToggleSidebar((prev) => !prev);
+  const [isclosing, setclosing] = useState(false);
+  const handleClose = () => {
+    setclosing(true);
+    setTimeout(() => {
+      setToggleSidebar(false);
+    }, 400);
   };
 
   return (
-    <div className="sidebar">
-      <button className="closesidebar" onClick={closeSidebar}>
+    <div className={`sidebar ${isclosing ? "slide-out" : "slide-in"}`}>
+      <button className="closesidebar" onClick={handleClose}>
         <MdCancel />
       </button>
       <div className="sidebar-content">
