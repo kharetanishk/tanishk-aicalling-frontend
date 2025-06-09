@@ -40,7 +40,10 @@ body {
 .app-container {
   position: relative;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
+}
+.app-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* Navbar */
@@ -91,5 +94,3 @@ body {
   object-fit: cover;
   border-radius: 50%;
 }
-
-

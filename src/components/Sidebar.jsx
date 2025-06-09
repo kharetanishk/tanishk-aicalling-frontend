@@ -9,6 +9,7 @@ import { FaHome } from "react-icons/fa";
 import { IoChatbubbleEllipses } from "react-icons/io5";
 import { FaLinkedin } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
+import { FaRobot } from "react-icons/fa6";
 
 export const Sidebar = () => {
   const setToggleSidebar = useSetRecoilState(toggleAtomstate);
@@ -78,6 +79,12 @@ export const Sidebar = () => {
                 <BiLogoGmail />
                 Gmail
               </a>
+            </li>
+            <li>
+              <Link to="/aboutproject" onClick={handleClose}>
+                <FaRobot />
+                Behind the AI
+              </Link>
             </li>
           </ul>
         </div>
