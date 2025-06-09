@@ -1,25 +1,59 @@
 .chat-container {
-  position: absolute;
-  right: 0;
-  bottom: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 6px;
-  gap: 2px;
-  font-size: 17px;
+  flex-direction: column;
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: rgb(200, 199, 199);
-  margin-right: 5px;
-  cursor: pointer;
-}
-.chat-button {
   background-color: #0d131f;
-  color: rgb(200, 199, 199);
-  width: 20px;
-  height: 20px;
-  font-size: 18px;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+  gap: 10px;
+}
+.chat-container h2 {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.input-box {
+  font-size: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0.75rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-button {
+  background-color: #3b3b3c;
+  color: white;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 1.2rem;
+  display: block;
+  width: fit-content;
+  padding: 10px;
+  transition: background-color 0.2s;
+}
+
+.chat-button:hover {
+  background-color: #3a7bd5;
+}
+
+.response-box {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  color: #fdfdfd;
+  white-space: pre-wrap;
+}
+.response-box:active {
+  background-color: #4a76ce;
+}
+.error-text {
+  color: red;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-size: 0.9rem;
+  transition: opacity 0.3s;
 }

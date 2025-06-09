@@ -114,7 +114,7 @@ const Aboutproject = () => {
         If you’d like to discuss this project or need any insights, feel free to
         contact me at:
         <br />
-        <strong>Phone:</strong> 6260440241
+        <b>Phone:</b> <b>6260440241</b>
       </p>
     </div>
   );

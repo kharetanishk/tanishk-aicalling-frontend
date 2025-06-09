@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+import "../css/chat.css";
 
 const Chatinterface = () => {
   const [userMessage, setUserMessage] = useState("");
   const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleSend = async () => {
+    if (!userMessage.trim()) {
+      setError("Input box cannot be blank");
+      return;
+    }
+
+    setError(""); // clear any old errors
+    setLoading(true);
+    setResponse("");
+
     try {
       const res = await axios.post("http://localhost:1601/chat", {
         userMessage,
@@ -13,25 +34,29 @@ const Chatinterface = () => {
       setResponse(res.data.response);
     } catch (error) {
       console.error("Error:", error.message);
-      setResponse("Something went wrong.+ in the response");
+      setResponse("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div style={{ padding: "1rem", maxWidth: 500, margin: "auto" }}>
+    <div className="chat-container">
       <h2>Talk to Tanishk’s AI</h2>
       <input
+        className="input-box"
         type="text"
         placeholder="Ask something..."
         value={userMessage}
         onChange={(e) => setUserMessage(e.target.value)}
-        style={{ width: "100%", padding: "0.5rem", marginBottom: "0.5rem" }}
       />
-      <button onClick={handleSend} style={{ padding: "0.5rem 1rem" }}>
+      {error && <p className="error-text">{error}</p>}
+      <button className="chat-button" onClick={handleSend}>
         Send
       </button>
-      <div style={{ marginTop: "1rem", whiteSpace: "pre-wrap" }}>
-        <strong>AI:</strong> {response}
+
+      <div className="response-box">
+        <strong>AI:</strong> {loading ? <span>🤖 Thinking...</span> : response}
       </div>
     </div>
   );
