@@ -41,22 +41,25 @@ const Chatinterface = () => {
   };
 
   return (
-    <div className="chat-container">
-      <h2>Talk to Tanishk’s AI</h2>
-      <input
-        className="input-box"
-        type="text"
-        placeholder="Ask something..."
-        value={userMessage}
-        onChange={(e) => setUserMessage(e.target.value)}
-      />
-      {error && <p className="error-text">{error}</p>}
-      <button className="chat-button" onClick={handleSend}>
-        Send
-      </button>
+    <div className="chat-wrapper">
+      <div className="chat-container">
+        <h2>Talk to Tanishk’s AI</h2>
+        <input
+          className="input-box"
+          type="text"
+          placeholder="Ask something..."
+          value={userMessage}
+          onChange={(e) => setUserMessage(e.target.value)}
+        />
+        {error && <p className="error-text">{error}</p>}
+        <button className="chat-button" onClick={handleSend}>
+          Send
+        </button>
 
-      <div className="response-box">
-        <strong>AI:</strong> {loading ? <span>🤖 Thinking...</span> : response}
+        <div className="response-box">
+          <strong>AI:</strong>{" "}
+          {loading ? <span>🤖 Thinking...</span> : response}
+        </div>
       </div>
     </div>
   );
