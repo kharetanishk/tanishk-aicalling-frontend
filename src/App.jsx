@@ -5,12 +5,13 @@ import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { BsLayoutSidebar } from "react-icons/bs";
 import { RecoilRoot, useRecoilState } from "recoil";
 import { toggleAtomstate } from "./states/atoms";
-import CallingApp, { Loader } from "./components/Call";
+import CallingApp from "./components/Call";
 import CallingInterface from "./components/Callinterface";
 import ThankYou from "./components/Thankyou";
 import { Aboutproject } from "./components/About";
 import Chatinterface from "./components/Chatinterface";
 import { Sidebar } from "./components/Sidebar";
+import { Loader } from "./components/Loader";
 
 function App() {
   return (

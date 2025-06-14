@@ -1,4 +1,5 @@
 import callertune from "../assets/callertune.mp3";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Call.css";
 
@@ -10,7 +11,7 @@ export const Loader = () => {
     audio.loop = true;
     const timer = setInterval(() => {
       audio.play();
-    }, 500);
+    }, 700);
 
     return () => {
       clearInterval(timer);

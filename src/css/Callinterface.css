@@ -159,3 +159,20 @@
     transform: rotate(360deg);
   }
 }
+.api-error-message-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  padding: 10px 15px;
+  background-color: #1a1a1f;
+  color: #b00020;
+
+  border-radius: 8px;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.error-icon {
+  font-size: 2rem;
+}

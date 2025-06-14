@@ -8,11 +8,14 @@ import { FaMicrophone } from "react-icons/fa6";
 import { useEffect, useRef, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-
 import { RiSpeakFill } from "react-icons/ri";
 import axios from "axios";
 import Timer from "../components/Timer.jsx";
 import FormatTime from "../components/Formattime.jsx";
+
+// Recoil imports
+import { useResetRecoilState } from "recoil";
+import { elapsedTimeAtom } from "../states/atoms";
 
 const CallingInterface = () => {
   const [isspeakerOn, setSpeaker] = useState(false);
@@ -20,19 +23,17 @@ const CallingInterface = () => {
   const [userTranscript, setTranscript] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [responseFromAI, setResponse] = useState("");
+  const [apiError, setApiError] = useState(null);
   const recognitionRef = useRef(null);
   const greetedRef = useRef(false);
   const navigate = useNavigate();
+
+  const resetElapsedTime = useResetRecoilState(elapsedTimeAtom);
+
   const MemoizedLottie = React.memo(({ animationData }) => (
     <Lottie className="call-bot" animationData={animationData} />
   ));
 
-  const formatTime = (seconds) => {
-    const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
-    const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
-    const secs = String(seconds % 60).padStart(2, "0");
-    return `${hrs}:${mins}:${secs}`;
-  };
   useEffect(() => {
     greetedRef.current = false;
 
@@ -58,9 +59,12 @@ const CallingInterface = () => {
     }
 
     return () => {
-      console.log("Leaving /callinginterface — stopping speech");
+      console.log(
+        "Leaving /callinginterface — stopping speech and resetting timer"
+      );
       speechSynthesis.cancel();
       stopListening();
+      resetElapsedTime();
     };
   }, []);
 
@@ -96,9 +100,13 @@ const CallingInterface = () => {
         });
         const data = res.data;
         setResponse(data.response);
+        setApiError(null);
         speak(data.response);
       } catch (err) {
         console.error("❌ API Error:", err);
+        setApiError(
+          "Unable to connect to the backend. Please try again later."
+        );
         setResponse("Something went wrong while fetching the response.");
       }
       setLoading(false);
@@ -151,6 +159,15 @@ const CallingInterface = () => {
   const handleclick = () => {
     setSpeaker((prev) => !prev);
   };
+  useEffect(() => {
+    if (apiError !== null) {
+      const timer = setTimeout(() => {
+        setApiError("");
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [apiError]);
 
   return (
     <>
@@ -172,6 +189,12 @@ const CallingInterface = () => {
             </p>
           </div>
           <div className="control-area">
+            {apiError && (
+              <div className="api-error-message-container">
+                <MdErrorOutline className="error-icon" />
+                <p className="api-error-text">{apiError}</p>
+              </div>
+            )}
             <div className="control-buttons">
               <button className="call-speaker" onClick={handleclick}>
                 <HiSpeakerWave />
