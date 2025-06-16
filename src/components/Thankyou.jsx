@@ -8,7 +8,7 @@ const ThankYou = () => {
 
   return (
     <>
-      <div className="thank-you-container">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#0d131f] text-[#ffffff] text-center p-5 gap-1 border-[0.1px] border-solid border-[#b6b3b3]">
         <img src={thankyoupic} alt="Tanishk" className="thank-you-image" />
         <h3>Thankyou for talking with Tanishk's AI!</h3>
         <p>🕒 Interaction Time: {time}</p>
