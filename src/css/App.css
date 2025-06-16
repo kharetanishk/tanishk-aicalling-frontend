@@ -1,5 +1,6 @@
 /* Reset & base */
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import "tailwindcss";
 * {
   margin: 0;
   padding: 0;
