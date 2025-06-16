@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import thankyoupic from "../assets/thankyourobot.jpg";
-import "../css/Thankyou.css";
 
 const ThankYou = () => {
   const location = useLocation();
@@ -8,13 +7,13 @@ const ThankYou = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-center min-h-screen bg-[#0d131f] text-[#ffffff] text-center p-5 gap-2  border-[0.1px] border-solid border-[#b6b3b3]">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[#0d131f] text-[#ffffff] text-center p-5 gap-2  border-[0.1px] border-solid border-[#b6b3b3] font-roboto ">
         <img
           src={thankyoupic}
           alt="Tanishk"
-          className="w-62.5 max-w-[80%] rounded-[50%] mb-8 shadow-neon"
+          className="w-62.5 max-w-[80%] rounded-[50%] mb-8 "
         />
-        <h3 className="text-xl mb-2 text-[#aaaead]">
+        <h3 className="text-xl mb-2 text-[#aaaead] ">
           Thankyou for talking with Tanishk's AI!
         </h3>
         <p className="text-base text-[#bbbbbb] mt-1">

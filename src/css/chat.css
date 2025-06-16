@@ -1,5 +1,5 @@
 .chat-wrapper {
-  border: 0.1px solid rgb(182, 179, 179);
+  border: 0.1px solid #b6b3b3;
   height: 100vh;
   overflow-y: auto;
 }

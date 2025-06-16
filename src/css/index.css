@@ -1,4 +1,7 @@
-@import "tailwindcss";
-@tailwind base;
-@tailwind components;
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-roboto: "Roboto", "sans-serif";
+}
