@@ -11,7 +11,7 @@ const ThankYou = () => {
         <img
           src={thankyoupic}
           alt="Tanishk"
-          className="w-62.5 max-w-[80%] rounded-[50%] mb-8 "
+          className="w-63 max-w-[80%] rounded-[50%] mb-8 shadow-neon "
         />
         <h3 className="text-xl mb-2 text-[#aaaead] ">
           Thankyou for talking with Tanishk's AI!

@@ -1,7 +1,4 @@
-import { toggleAtomstate } from "../states/atoms.js";
 import { MdCancel } from "react-icons/md";
-import { useSetRecoilState } from "recoil";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Sidebar.css";
 import { FaGithub } from "react-icons/fa";
@@ -11,25 +8,9 @@ import { FaLinkedin } from "react-icons/fa";
 import { BiLogoGmail } from "react-icons/bi";
 import { FaRobot } from "react-icons/fa6";
 
-export const Sidebar = () => {
-  const setToggleSidebar = useSetRecoilState(toggleAtomstate);
-  const [isclosing, setclosing] = useState(false);
-
-  useEffect(() => {
-    if (isclosing) {
-      const timer = setTimeout(() => {
-        setToggleSidebar((prev) => !prev);
-      }, 300);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isclosing]);
-  const handleClose = () => {
-    setclosing(true);
-  };
-
+export const Sidebar = ({ isClosing, handleClose }) => {
   return (
-    <div className={`sidebar ${isclosing ? "slide-out" : "slide-in"}`}>
+    <div className={`sidebar ${isClosing ? "slide-out" : "slide-in"}`}>
       <button className="closesidebar" onClick={handleClose}>
         <MdCancel />
       </button>

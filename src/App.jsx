@@ -1,5 +1,5 @@
-import "./css/App.css";
 import "./css/index.css";
+
 import tanupic from "./assets/tanuai.png";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { BsLayoutSidebar } from "react-icons/bs";
@@ -12,6 +12,8 @@ import { Aboutproject } from "./components/About";
 import Chatinterface from "./components/Chatinterface";
 import { Sidebar } from "./components/Sidebar";
 import { Loader } from "./components/Loader";
+import { useState } from "react";
+import { useEffect } from "react";
 
 function App() {
   return (
@@ -34,33 +36,77 @@ function App() {
 
 export const Layout = () => {
   const [isSidebarOpen, setToggleSidebar] = useRecoilState(toggleAtomstate);
-  const toggleSidebar = () => setToggleSidebar((prev) => !prev);
+  const [isClosing, setIsClosing] = useState(false);
+  const handleCloseWithAnimation = () => {
+    setIsClosing(true);
+  };
+
+  useEffect(() => {
+    if (isClosing) {
+      const timer = setTimeout(() => {
+        setToggleSidebar(false);
+        setIsClosing(false); // reset for future transitions
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isClosing]);
 
   return (
-    <div className="mobile-frame">
-      <div className="app-container">
-        <div className="navbar">
-          <div className="navbar-left">
+    <div
+      className="w-full 
+    min-w-[320px] 
+    max-w-full 
+    mx-auto 
+    h-screen 
+    overflow-hidden 
+    relative 
+    bg-[#0d131f]
+    
+    md:max-w-lg
+    md:rounded-5 
+    md:border-3 
+    md:border-solid 
+    md:border-[#222] 
+    md:shadow-purple"
+    >
+      <div className="relative h-screen overflow-y-auto app-container">
+        <div className="relative  z-[1001] h-15 background-app flex items-center justify-between border-app p-3 ">
+          <div className="w-10 flex items-center justify-center">
             {!isSidebarOpen && (
-              <button className="sidebar-btn" onClick={toggleSidebar}>
+              <button
+                className="bg-none border-none text-white text-2xl cursor-pointer"
+                onClick={() => setToggleSidebar(true)}
+              >
                 <BsLayoutSidebar />
               </button>
             )}
           </div>
 
-          <p className="appname">Tanishk AI</p>
+          <p className="text-2xl text-white p-2 bg-[#3a3a3ab3] rounded-xl">
+            Tanishk AI
+          </p>
 
-          <div className="navbar-right">
-            <div className="photo-container">
-              <img className="profile-pic" src={tanupic} alt="profilepic" />
+          <div className="w-10 flex items-center justify-center">
+            <div className="w-[35px] h-[35px]">
+              <img
+                className="w-full h-full object-cover rounded-full"
+                src={tanupic}
+                alt="profilepic"
+              />
             </div>
           </div>
         </div>
 
         {isSidebarOpen && (
           <>
-            <Sidebar closeSidebar={toggleSidebar} />
-            <div className="overlay" onClick={toggleSidebar}></div>
+            <Sidebar
+              isClosing={isClosing}
+              handleClose={handleCloseWithAnimation}
+            />
+            <div
+              className="overlay-app"
+              onClick={handleCloseWithAnimation}
+            ></div>
           </>
         )}
         <Outlet />
