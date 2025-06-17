@@ -6,6 +6,7 @@ const Chatinterface = () => {
   const [response, setResponse] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:1601/chat";
 
   useEffect(() => {
     if (error) {
@@ -27,7 +28,7 @@ const Chatinterface = () => {
     setResponse("");
 
     try {
-      const res = await axios.post("http://localhost:1601/chat", {
+      const res = await axios.post(API_URL, {
         userMessage,
       });
       setResponse(res.data.response);

@@ -29,6 +29,7 @@ const CallingInterface = () => {
   const greetedRef = useRef(false);
   const navigate = useNavigate();
   const resetElapsedTime = useResetRecoilState(elapsedTimeAtom);
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:1601/chat";
   const MemoizedLottie = React.memo(({ animationData }) => (
     <Lottie
       className="w-3xs h-64 rounded-full border-none p-2"
@@ -115,7 +116,7 @@ const CallingInterface = () => {
       setListening(false);
       setLoading(true);
       try {
-        const res = await axios.post("http://localhost:1601/chat", {
+        const res = await axios.post(API_URL, {
           userMessage: userText,
         });
         const data = res.data;
