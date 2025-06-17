@@ -32,34 +32,37 @@ const Aboutproject = () => {
         </h2>
         <ul className="list-disc pl-6 mb-4">
           <li className="mb-2 text-[#e5f2ff]">
-            <strong>ReactJS:</strong> For the frontend user interface with a
-            mobile-first design approach.
+            <strong className="text-[#ffffff]">ReactJS:</strong> For the
+            frontend user interface with a mobile-first design approach.
           </li>
           <li className="mb-2 text-[#e5f2ff]">
-            <strong>Recoil:</strong> To manage state across components like the
-            sidebar and voice status.
+            <strong className="text-[#ffffff]">Recoil:</strong> To manage state
+            across components like the sidebar and voice status.
           </li>
           <li className="mb-2 text-[#e5f2ff]">
-            <strong>Web Speech API:</strong> Integrated for{" "}
-            <em>speech-to-text</em> (voice input) and <em>text-to-speech</em>{" "}
-            (AI output).
+            <strong className="text-[#ffffff]">Web Speech API:</strong>{" "}
+            Integrated for <em>speech-to-text</em> (voice input) and{" "}
+            <em>text-to-speech</em> (AI output).
           </li>
           <li className="mb-2 text-[#e5f2ff]">
-            <strong>OpenAI API:</strong> The heart of the AI brain — all
-            questions are sent to OpenAI's GPT model for smart responses.
+            <strong className="text-[#ffffff]">OpenAI API:</strong> The heart of
+            the AI brain — all questions are sent to OpenAI's GPT model for
+            smart responses.
           </li>
           <li className="mb-2 text-[#e5f2ff]">
-            <strong>Token Management:</strong> Every conversation uses tokens on
-            OpenAI's side — this isn’t free. I’ve handled caching,
-            token-efficient structuring, and cost optimization throughout.
+            <strong className="text-[#ffffff]">Token Management:</strong> Every
+            conversation uses tokens on OpenAI's side — this isn’t free. I’ve
+            handled caching, token-efficient structuring, and cost optimization
+            throughout.
           </li>
           <li className="mb-2 text-[#e5f2ff]">
-            <strong>Node.js + Express:</strong> For the backend API that serves
-            my structured JSON portfolio data and handles routing securely.
+            <strong className="text-[#ffffff]">Node.js + Express:</strong> For
+            the backend API that serves my structured JSON portfolio data and
+            handles routing securely.
           </li>
           <li className="mb-2 text-[#e5f2ff]">
-            <strong>Lottie & Custom CSS:</strong> For responsive animations and
-            a cleaner user experience.
+            <strong className="text-[#ffffff]">Lottie & Tailwind CSS:</strong>{" "}
+            For responsive animations and a cleaner user experience.
           </li>
         </ul>
 
@@ -71,27 +74,27 @@ const Aboutproject = () => {
           challenges:
         </p>
         <ul className="list-disc pl-6 mb-4">
-          <li>
+          <li className="mb-2 text-[#e5f2ff]">
             Mastering and synchronizing the Web Speech API with React's
             rendering cycle.
           </li>
-          <li>
+          <li className="mb-2 text-[#e5f2ff]">
             Getting OpenAI responses to sound natural and context-aware — while
             also minimizing API token costs.
           </li>
-          <li>
+          <li className="mb-2 text-[#e5f2ff]">
             Creating a realistic voice interface with loading animations and a
             call timer.
           </li>
-          <li>
+          <li className="mb-2 text-[#e5f2ff]">
             Implementing smart UI/UX with conditional logic for mobile-view
             frames and dynamic routing.
           </li>
-          <li>
+          <li className="mb-2 text-[#e5f2ff]">
             Designing sidebar logic to open/close with smooth animations while
             syncing the navigation flow.
           </li>
-          <li>
+          <li className="mb-2 text-[#e5f2ff]">
             Writing clean code with reusable components and proper file
             structure while under a tight self-imposed deadline.
           </li>
@@ -130,7 +133,7 @@ const Aboutproject = () => {
           to contact me at:
           <br />
           <span className="mt-1 text-base">
-            <b>Phone:</b> <b className=" text-pink-300">6260440241</b>
+            <b>Phone:</b> <b className=" text-[#bd9f9f]">6260440241</b>
           </span>
         </p>
       </div>
