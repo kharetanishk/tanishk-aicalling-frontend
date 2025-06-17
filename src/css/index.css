@@ -80,4 +80,46 @@
       transform: translateX(-100%);
     }
   }
+  .call-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    background-color: #0d131f;
+    border: 1px solid white;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+  }
+
+  .call-button:hover {
+    background-color: rgba(14, 221, 239, 255);
+    box-shadow: 1px 1px 10px 1px rgba(26, 86, 132, 0.3);
+    color: black;
+    transform: scale(1.05) skew(20);
+    font-weight: bolder;
+  }
+  .call-button:active {
+    background-color: rgba(14, 221, 239, 255);
+    box-shadow: 1px 1px 10px 1px rgba(26, 86, 132, 0.3);
+    color: black;
+  }
+  .spinner {
+    width: 30px;
+    height: 30px;
+    border: 4px dotted #bbbcbc;
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
