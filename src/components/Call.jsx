@@ -23,10 +23,10 @@ export const CallerTab = () => {
         <img
           src={centrepic}
           alt="callpic"
-          className="border-none width-full max-w-[300px] overflow-hidden "
+          className="border-none width-full max-w-[300px] overflow-hidden mr-6 relative -top-[2.5rem]"
         />
         <button
-          className="call-button font-roboto hover:call-button active:call-button"
+          className="call-button font-roboto hover:call-button active:call-button relative mr-3 -top-10 "
           onClick={handleclick}
         >
           <IoCallSharp /> Start Call
