@@ -1,5 +1,4 @@
 import "./css/index.css";
-
 import tanupic from "./assets/tanuai.png";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { BsLayoutSidebar } from "react-icons/bs";
@@ -53,7 +52,7 @@ export const Layout = () => {
 
   return (
     <div
-      className="w-full 
+      className="   w-full 
     min-w-[320px] 
     max-w-full 
     mx-auto 
@@ -61,20 +60,21 @@ export const Layout = () => {
     overflow-hidden 
     relative 
     bg-[#0d131f]
-    
+    b
+
     md:max-w-lg
-    md:rounded-5 
-    md:border-3 
-    md:border-solid 
-    md:border-[#222] 
-    md:shadow-purple"
+    md:rounded-[15px]
+    md:border-[10px]
+    md:border-[#222]
+  shadow-purple
+   md:border-solid"
     >
-      <div className="relative h-screen overflow-y-auto app-container">
+      <div className="relative  h-screen overflow-y-auto app-container">
         <div className="relative  z-[1001] h-15 background-app flex items-center justify-between border-app p-3 ">
           <div className="w-10 flex items-center justify-center">
             {!isSidebarOpen && (
               <button
-                className="bg-none border-none text-white text-2xl cursor-pointer"
+                className="bg-none border-none  text-2xl cursor-pointer"
                 onClick={() => setToggleSidebar(true)}
               >
                 <BsLayoutSidebar />
@@ -82,7 +82,7 @@ export const Layout = () => {
             )}
           </div>
 
-          <p className="text-2xl text-white p-2 bg-[#3a3a3ab3] rounded-xl">
+          <p className="text-2xl  p-1.5 bg-[#3a3a3ab3] rounded-xl">
             Tanishk AI
           </p>
 
