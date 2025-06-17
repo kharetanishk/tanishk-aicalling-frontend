@@ -13,6 +13,7 @@ import { Sidebar } from "./components/Sidebar";
 import { Loader } from "./components/Loader";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Fallback } from "./components/Fallback";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/chat" element={<Chatinterface />} />
             <Route path="/thankyou" element={<ThankYou />} />
             <Route path="/aboutproject" element={<Aboutproject />} />
+            <Route path="*" element={<Fallback />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -89,7 +91,7 @@ export const Layout = () => {
           <div className="w-10 flex items-center justify-center">
             <div className="w-[35px] h-[35px]">
               <img
-                className="w-full h-full object-cover rounded-full"
+                className="w-full h-full object-cover rounded-full cursor-pointer"
                 src={tanupic}
                 alt="profilepic"
               />

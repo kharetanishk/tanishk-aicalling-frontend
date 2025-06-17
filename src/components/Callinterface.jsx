@@ -1,7 +1,8 @@
-import Lottie from "lottie-react";
+import "../css/index.css";
 import React from "react";
+import axios from "axios";
+import Lottie from "lottie-react";
 import talkinginterface from "../assets/talkanimee.json";
-import "../css/Callinterface.css";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { MdCallEnd } from "react-icons/md";
 import { FaMicrophone } from "react-icons/fa6";
@@ -9,7 +10,6 @@ import { useEffect, useRef, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { RiSpeakFill } from "react-icons/ri";
-import axios from "axios";
 import Timer from "../components/Timer.jsx";
 import FormatTime from "../components/Formattime.jsx";
 
@@ -18,6 +18,7 @@ import { useResetRecoilState } from "recoil";
 import { elapsedTimeAtom } from "../states/atoms";
 
 const CallingInterface = () => {
+  const [isGreeting, setIsGreeting] = useState(true);
   const [isspeakerOn, setSpeaker] = useState(false);
   const [isListening, setListening] = useState(false);
   const [userTranscript, setTranscript] = useState("");
@@ -27,16 +28,32 @@ const CallingInterface = () => {
   const recognitionRef = useRef(null);
   const greetedRef = useRef(false);
   const navigate = useNavigate();
-
   const resetElapsedTime = useResetRecoilState(elapsedTimeAtom);
-
   const MemoizedLottie = React.memo(({ animationData }) => (
-    <Lottie className="call-bot" animationData={animationData} />
+    <Lottie
+      className="w-3xs h-64 rounded-full border-none p-2"
+      animationData={animationData}
+    />
   ));
+
+  const hasRequestedMicRef = useRef(false);
+
+  useEffect(() => {
+    if (hasRequestedMicRef.current) return;
+    hasRequestedMicRef.current = true;
+
+    navigator.mediaDevices.getUserMedia({ audio: true }).catch((err) => {
+      if (
+        err.name === "NotAllowedError" ||
+        err.name === "PermissionDeniedError"
+      ) {
+        alert("🎙️ Please allow microphone access for the best experience.");
+      }
+    });
+  }, []);
 
   useEffect(() => {
     greetedRef.current = false;
-
     const greetAndStart = () => {
       const greeting =
         "Hi, I am Tanishk's AI. Ask me anything about his portfolio.";
@@ -45,8 +62,11 @@ const CallingInterface = () => {
       greetSpeech.pitch = 1.2;
       greetSpeech.rate = 0.95;
 
+      setIsGreeting(true);
+
       greetSpeech.onend = () => {
         console.log("Greeting done, starting mic...");
+        setIsGreeting(false);
         startListening();
       };
 
@@ -78,18 +98,18 @@ const CallingInterface = () => {
 
     recognition.onstart = () => {
       setListening(true);
-      console.log("🎙️ Mic listening...");
+      console.log("Mic listening...");
       micTimeout = setTimeout(() => {
         recognition.stop();
         setListening(false);
-        setResponse("⏱️ Mic timed out. Tap again to talk.");
+        setResponse("Mic timed out. Tap again to talk.");
       }, 7000);
     };
 
     recognition.onresult = async (event) => {
       clearTimeout(micTimeout);
       const userText = event.results[0][0].transcript;
-      console.log("🗣️ You said:", userText);
+      console.log(" user said:", userText);
       setTranscript(userText);
       recognition.stop();
       setListening(false);
@@ -103,7 +123,7 @@ const CallingInterface = () => {
         setApiError(null);
         speak(data.response);
       } catch (err) {
-        console.error("❌ API Error:", err);
+        console.error(" API Error:", err);
         setApiError(
           "Unable to connect to the backend. Please try again later."
         );
@@ -114,11 +134,11 @@ const CallingInterface = () => {
 
     recognition.onerror = (event) => {
       clearTimeout(micTimeout);
-      console.error("🎙️ Mic Error:", event.error);
+      console.error(" Mic Error:", event.error);
       setListening(false);
 
       if (event.error === "not-allowed") {
-        setResponse("🎙️ Please allow microphone access.");
+        setResponse(" Please allow microphone access.");
       } else if (event.error === "no-speech") {
         setResponse("I didn’t hear anything. Try again.");
       } else {
@@ -129,7 +149,7 @@ const CallingInterface = () => {
     recognition.onend = () => {
       clearTimeout(micTimeout);
       setListening(false);
-      console.log("🎤 Mic stopped.");
+      console.log(" Mic stopped.");
     };
 
     recognitionRef.current = recognition;
@@ -140,7 +160,7 @@ const CallingInterface = () => {
     setListening(false);
   };
 
-  // 🗣️ Speak Function
+  // Speak Function
   const speak = (text) => {
     const utter = new SpeechSynthesisUtterance(text);
     utter.lang = "en-US";
@@ -171,65 +191,67 @@ const CallingInterface = () => {
 
   return (
     <>
-      <div className="callapp-wrapper">
-        <div className="call-container">
+      <div className="border-app flex justify-between items-center flex-col relative h-screen overflow-hidden">
+        <div className="flex box-border flex-col items-center justify-center h-[90vh] p-[30px] background-app relative overflow-hidden">
           {/* {console.log("app is rendering")} */}
           {isLoading ? (
-            <div className="ai-loader">
-              <p>🤖 Thinking...</p>
-              <div className="spinner"></div>
+            <div className="flex justify-center items-center w-2xs h-64 text-3xl text-[#c6cac9] font-bold p-[7px] ">
+              <p>🤖 Thinking....</p>
+              <span className="spinner"></span>
             </div>
           ) : (
             <MemoizedLottie animationData={talkinginterface} />
           )}
           <Timer />
-          <div className="timer-container">
-            <p className="timer">
+          <div className="flex items-center p-1.5 text-[20px] mb-8">
+            <p className="flex items-center font-medium p-1 " id="timer">
               <FormatTime />
             </p>
           </div>
-          <div className="control-area">
+          <div className="relative w-fit mt-2">
             {apiError && (
-              <div className="api-error-message-container">
-                <MdErrorOutline className="error-icon" />
-                <p className="api-error-text">{apiError}</p>
+              <div className="flex items-center justify-center mt-2 p-2 bg-[#1a1a1f] text-[#f9264d] rounded-b-lg gap-[5px] text-[12px]">
+                <MdErrorOutline className="text-2xl" />
+                <p>{apiError}</p>
               </div>
             )}
-            <div className="control-buttons">
-              <button className="call-speaker" onClick={handleclick}>
-                <HiSpeakerWave />
+            <div className="flex justify-around items-center gap-[50px] p-3">
+              <button
+                className="bg-[#0d131f] text-[#87cfd5] w-14 h-14 border-none rounded-full flex items-center justify-center cursor-pointer transition transform duration-200 ease"
+                onClick={handleclick}
+              >
+                <HiSpeakerWave className="text-2xl" />
               </button>
               <button
-                className="endcall-button"
+                className=" w-14 h-14 border-none rounded-full flex items-center justify-center cursor-pointer transition transform duration-200 ease"
                 onClick={() => {
                   navigate("/thankyou", {
                     state: {
-                      time: document.querySelector(".timer").textContent,
+                      time: document.querySelector("#timer").textContent,
                     },
                   });
                 }}
               >
-                <MdCallEnd />
+                <MdCallEnd className="bg-[#e31e13] mt-5 text-white text-6xl rounded-full p-2" />
               </button>
               <button
-                className="mic-button"
+                className="  w-14 h-14 border-none rounded-full flex items-center justify-center cursor-pointer transition transform duration-200 ease"
                 onClick={() => {
-                  if (!isListening) startListening();
+                  if (!isListening && !isGreeting) startListening();
                 }}
               >
                 {isListening ? (
-                  <span className="mic-listening">
-                    <RiSpeakFill />
+                  <span className=" w-14 h-14 border-none rounded-full flex items-center justify-center cursor-pointer transition transform duration-200 ease">
+                    <RiSpeakFill className="bg-[#0d131f] text-white text-2xl" />
                   </span>
                 ) : (
-                  <FaMicrophone />
+                  <FaMicrophone className="bg-[#0d131f] text-white text-2xl" />
                 )}
               </button>
             </div>
             {isspeakerOn && <Speakererror />}
           </div>
         </div>
-        {isspeakerOn && <Speakererror />}
       </div>
     </>
   );
@@ -237,9 +259,11 @@ const CallingInterface = () => {
 const Speakererror = () => {
   return (
     <>
-      <div className="Speaker-error-message-container">
+      <div className="absolute -bottom-15 left-[3%] bg-[#1a1a1f] p-4 rounded-2xl text-[#c5c7c9]  font-roboto flex items-center gap-2 z-10 text-[13px] w-fit">
         <MdErrorOutline />
-        <p className="error-message">Speaker mode is always on by default!</p>
+        <p className="font-bold text-[#a6a8a9;]">
+          Speaker mode is always on by default!
+        </p>
       </div>
     </>
   );
