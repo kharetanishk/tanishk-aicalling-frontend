@@ -29,7 +29,7 @@ const CallingInterface = () => {
   const greetedRef = useRef(false);
   const navigate = useNavigate();
   const resetElapsedTime = useResetRecoilState(elapsedTimeAtom);
-  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:1601/chat";
+  const API_URL = `${import.meta.env.VITE_API_URL}/chat`;
   const MemoizedLottie = React.memo(({ animationData }) => (
     <Lottie
       className="w-3xs h-64 rounded-full border-none p-2"
