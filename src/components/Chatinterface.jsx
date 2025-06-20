@@ -41,37 +41,32 @@ const Chatinterface = () => {
   };
 
   return (
-    <div className="border-[0.1px] h-full overflow-y-hidden border-solid border-[#b6b3b3] relative ">
-      <div className="mt-4 text-xl text-[#fdfdfd] whitespace-pre-wrap bg-[#4a76ce]">
-        <strong>AI:</strong> {loading ? <span>🤖 Thinking...</span> : response}
-      </div>
+    <div className="border-[0.1px] h-screen overflow-y-auto border-solid  border-[#b6b3b3] ">
       <div className="flex flex-col  font-roboto bg-[#0d131f] rounded-3 p-4 mt-2 gap-3">
-        <div className="flex flex-col absolute bottom-10">
-          <h2 className="flex justify-center text-3xl relative bottom-30 ">
-            Talk to Tanishk’s AI
-          </h2>
-          <div className="flex  p-3 relative rounded-b-xl left-72 bottom-20 mt-10 justify-center items-center ">
-            <input
-              className="text-base border border-solid  w-full rounded-xl outline-none p-3 transition-colors duration-200 h-14 pl-3 m-2.5"
-              type="text"
-              placeholder="Ask something..."
-              value={userMessage}
-              onChange={(e) => setUserMessage(e.target.value)}
-            />
-            <button
-              className="bg-[#3b3b3c] text-white  rounded-xl cursor-pointer justify-center items-center text-base border-none w-fit h-fit p-1  transition-colors duration-200 hover:bg-[#3a7bd5]  "
-              onClick={handleSend}
-            >
-              Send
-            </button>
-          </div>
-        </div>
-
+        <h2 className="flex justify-center text-3xl ">Talk to Tanishk’s AI</h2>
+        <input
+          className="text-2xl  border border-solid rounded-2 outline-none p-3 transition-colors duration-200 h-14 pl-3 m-2.5"
+          type="text"
+          placeholder="Ask something..."
+          value={userMessage}
+          onChange={(e) => setUserMessage(e.target.value)}
+        />
         {error && (
           <p className="text-red-500 mt-2 text-xl transition-opacity duration-300  w-fit ml-auto mr-auto">
             {error}
           </p>
         )}
+        <button
+          className="bg-[#3b3b3c] text-white  rounded-1.2 cursor-pointer text-xl border-none block w-fit p-2 ml-2.5 transition-colors duration-200 hover:bg-[#3a7bd5]  "
+          onClick={handleSend}
+        >
+          Send
+        </button>
+
+        <div className="mt-4 text-xl text-[#fdfdfd] whitespace-pre-wrap active:bg-[background-color: #4a76ce]">
+          <strong>AI:</strong>{" "}
+          {loading ? <span>🤖 Thinking...</span> : response}
+        </div>
       </div>
     </div>
   );

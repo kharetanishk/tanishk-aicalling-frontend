@@ -65,8 +65,8 @@ export const CallerTab = () => {
           setTimeout(() => {
             setMicStep("");
             setReadyToCall(true);
-          }, 2000); // Delay before showing call button
-        }, 6000); // Delay for the final success message
+          }, 2000);
+        }, 5000);
       })
       .catch((err) => {
         console.log(err);
@@ -83,26 +83,23 @@ export const CallerTab = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-screen p-2 background-app border-app overflow-hidden">
-      {/* Image */}
       <img
         src={centrepic}
         alt="callpic"
-        className="border-none max-w-[300px] overflow-hidden relative -top-10"
+        className="border-none max-w-[300px] overflow-hidden relative -top-7"
       />
 
       {/* Mic Permission Button */}
       {!micStatus && !readyToCall && (
         <button
-          className="call-button font-roboto hover:call-button active:call-button mt-4"
+          className="call-button font-roboto hover:call-button active:call-button mt-4 relative -top-11"
           onClick={handleMicPermission}
         >
-          🎙️ Allow Microphone Access
+          🎙️Allow Microphone Access
         </button>
       )}
 
-      {/* Steps and Call Button Grouped Together */}
       <div className="flex flex-col items-center mt-4 space-y-3 min-h-[80px]">
-        {/* Step Message */}
         <AnimatePresence mode="wait">
           {micStep && (
             <motion.p
@@ -111,14 +108,13 @@ export const CallerTab = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.5 }}
-              className="text-sm font-semibold text-center max-w-sm"
+              className="text-sm font-semibold text-center max-w-sm  relative -top-10"
             >
               {micStep}
             </motion.p>
           )}
         </AnimatePresence>
 
-        {/* Start Call Button */}
         <AnimatePresence>
           {readyToCall && micStatus && !micStep && (
             <motion.button
@@ -126,10 +122,10 @@ export const CallerTab = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="call-button font-roboto hover:call-button active:call-button"
+              className="call-button font-roboto hover:call-button active:call-button relative -top-11"
               onClick={handleclick}
             >
-              <IoCallSharp className="inline-block mr-1" /> Start Call
+              <IoCallSharp className="inline-block mr-1  " /> Start Call
             </motion.button>
           )}
         </AnimatePresence>
