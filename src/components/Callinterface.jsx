@@ -155,7 +155,7 @@ const CallingInterface = () => {
       recognition.stop();
       setListening(false);
       setLoading(true);
-      setStatusMessage("🤖 Thinking...");
+      setStatusMessage("Connecting to the backend...");
 
       try {
         const res = await axios.post(API_URL, { userMessage: userText });
