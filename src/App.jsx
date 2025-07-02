@@ -62,8 +62,6 @@ export const Layout = () => {
     overflow-hidden 
     relative 
     bg-[#0d131f]
-    
-
     md:max-w-lg
     md:rounded-[15px]
     md:border-[10px]
