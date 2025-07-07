@@ -2,65 +2,105 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const Chatinterface = () => {
+  const [messageList, setmessageList] = useState([]); //{usermessage:"somthing",airesponse :"soemethibg"}
   const [userMessage, setUserMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [airesponse, setAiresponse] = useState("");
   const API_URL = `${import.meta.env.VITE_API_URL}/chat`;
 
+  //removes error after 2 seconds
   useEffect(() => {
     if (error !== null) {
       const timer = setTimeout(() => {
         setError("");
       }, 2000);
-
       return () => clearTimeout(timer);
     }
   }, [error]);
 
   const handleSend = async () => {
-    if (!userMessage) {
+    if (!userMessage.trim()) {
       setError("Input box cannot be blank");
+      return;
     }
 
     setError("");
     setLoading(true);
-    setAiresponse("");
+
+    //user ka msg messagelist mein daalo
+    setmessageList((prev) => [...prev, { role: "user", content: userMessage }]);
+    // console.log(`user : ${messageList}`);
 
     try {
       const res = await axios.post(API_URL, {
         userMessage: userMessage,
       });
-      setAiresponse(res.data.response);
+      // console.log(res.data.response);
+
+      setmessageList((prev) => [
+        ...prev,
+        { role: "system", content: res.data.response },
+      ]);
     } catch (error) {
       console.error("Error:", error.message);
-      setAiresponse("Something went wrong. Please try again.");
+
+      setmessageList((prev) => [
+        ...prev,
+        {
+          role: "system",
+          content: "Something went wrong , Please try again later",
+        },
+      ]);
     } finally {
+      setUserMessage("");
       setLoading(false);
     }
   };
   return (
     <>
-      <div>{loading ? "thinking" : <>{airesponse}</>}</div>
-      <div className="flex relative justify-center border-app h-svh w-full">
-        <div className="flex fixed p-3 items-center mb-2 bottom-0 overflow-y-auto">
-          <div className="flex w-full h-11 border-app gap-2 items-center">
-            <input
-              className="w-[260px] h-full pl-3 border-app text-base placeholder:text-amber-50 rounded-2xl ml-2"
-              value={userMessage}
-              onChange={(e) => setUserMessage(e.target.value)}
-              type="text"
-              placeholder="Ask about Tanishk's portfolio"
-            />
-
-            <button
-              className="cursor-pointer mr-3 p-2 rounded-xl border-app"
-              onClick={handleSend}
+      <div className=" flex flex-col h-[82vh] overflow-y-auto app-container">
+        {messageList.map((msg, index) => (
+          <>
+            <div
+              key={index}
+              className={`border-app m-3 max-w-[70%] px-4 py-2 rounded-2xl ${
+                msg.role === "user"
+                  ? "border-app font-medium text-base self-end ml-4"
+                  : "border-app font-semibold chat-ai self-start mr-4"
+              }`}
             >
-              Send
-            </button>
+              {msg.content}
+            </div>
+          </>
+        ))}
+        {loading && (
+          <div className=" mr-4 text-white self-start px-4 py-2 rounded-2xl">
+            Thinking...
           </div>
+        )}
+        <div className="flex justify-center items-center">
+          {error && (
+            <p className="text-red-500 text-sm px-4 pb-1 fixed bottom-16 ">
+              {error}
+            </p>
+          )}
         </div>
+      </div>
+
+      <div className="w-full  fixed mb-1.5 bottom-0  px-4 py-4  flex items-center gap-2">
+        <input
+          type="text"
+          className="flex w-[380px] justify-center items-center border rounded-xl px-3 py-2"
+          placeholder="Ask something..."
+          value={userMessage}
+          onChange={(e) => setUserMessage(e.target.value)}
+        />
+        <button
+          className="bg-blue-500 text-black font-bold px-4 py-2 rounded-xl hover:cursor-pointer"
+          onClick={handleSend}
+        >
+          Send
+        </button>
       </div>
     </>
   );

@@ -7,6 +7,7 @@
 
 @theme {
   --font-roboto: "Roboto", "sans-serif";
+  --color-blue-500: rgba(14, 221, 239, 255);
 }
 
 @layer utilities {
@@ -21,6 +22,11 @@
   }
   .shadow-neon {
     box-shadow: 0 4px 20px rgba(0, 255, 200, 0.4);
+  }
+
+  .chat-ai {
+    background-color: #a6dbdb;
+    color: #213056;
   }
 
   .app-container::-webkit-scrollbar {
