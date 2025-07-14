@@ -2,6 +2,7 @@ import "../css/index.css";
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Lottie from "lottie-react";
+
 import talkinginterface from "../assets/talkanimee.json";
 import { HiSpeakerWave } from "react-icons/hi2";
 import { MdCallEnd, MdErrorOutline } from "react-icons/md";
@@ -32,12 +33,12 @@ const CallingInterface = () => {
   const navigate = useNavigate();
   const recognitionRef = useRef(null);
   const greetedRef = useRef(false);
-  const hasRequestedMicRef = useRef(false);
+
   const resetElapsedTime = useResetRecoilState(elapsedTimeAtom);
-  const API_URL = `${import.meta.env.VITE_API_URL}/chat`;
+  const API_URL = `${import.meta.env.VITE_EC2_URL}/chat`;
+
   useEffect(() => {
     speechSynthesis.cancel();
-
     recognitionRef.current?.abort?.();
     recognitionRef.current = null;
     greetedRef.current = false;
@@ -47,8 +48,8 @@ const CallingInterface = () => {
         "Hi, I am Tanishk's AI. You can ask me anything about his portfolio. Tap the mic button below when you're ready to speak.";
       const greetSpeech = new SpeechSynthesisUtterance(greeting);
       greetSpeech.lang = "en-US";
-      greetSpeech.pitch = 1.2;
-      greetSpeech.rate = 0.95;
+      greetSpeech.pitch = 1.9;
+      greetSpeech.rate = 1.2;
 
       setIsGreeting(true);
       setStatusMessage("Speaking...");
@@ -70,51 +71,6 @@ const CallingInterface = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (hasRequestedMicRef.current) return;
-    hasRequestedMicRef.current = true;
-
-    navigator.mediaDevices.getUserMedia({ audio: true }).catch((err) => {
-      alert("🎙️ Please allow microphone access for the best experience.");
-      navigate("/"); // redirect if mic access denied
-    });
-  }, []);
-
-  useEffect(() => {
-    greetedRef.current = false;
-
-    const greetAndStart = () => {
-      const greeting =
-        "Hi, I am Tanishk's AI. You can ask me anything about his portfolio. Tap the mic button below when you're ready to speak.";
-      const greetSpeech = new SpeechSynthesisUtterance(greeting);
-      greetSpeech.lang = "en-US";
-      greetSpeech.pitch = 1.2;
-      greetSpeech.rate = 0.95;
-
-      setIsGreeting(true);
-      setStatusMessage("Speaking...");
-
-      greetSpeech.onend = () => {
-        setIsGreeting(false);
-        setStatusMessage("🎤 Tap to talk");
-      };
-
-      speechSynthesis.cancel();
-      speechSynthesis.speak(greetSpeech);
-    };
-
-    if (!greetedRef.current) {
-      greetedRef.current = true;
-      greetAndStart();
-    }
-
-    return () => {
-      speechSynthesis.cancel();
-      stopListening();
-      resetElapsedTime();
-    };
-  }, []);
-
   const startListening = () => {
     if (!("webkitSpeechRecognition" in window)) {
       alert(
@@ -122,14 +78,6 @@ const CallingInterface = () => {
       );
       return;
     }
-
-    navigator.permissions?.query({ name: "microphone" }).then((res) => {
-      if (res.state === "denied") {
-        alert("Microphone permission denied.");
-        navigate("/");
-        return;
-      }
-    });
 
     const recognition = new window.webkitSpeechRecognition();
     recognition.lang = "en-US";

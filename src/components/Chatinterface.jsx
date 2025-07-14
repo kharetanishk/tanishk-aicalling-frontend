@@ -6,7 +6,7 @@ const Chatinterface = () => {
   const [userMessage, setUserMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const API_URL = `${import.meta.env.VITE_API_URL}/chat`;
+  const API_URL = `${import.meta.env.VITE_EC2_URL}/chat`;
 
   //removes error after 2 seconds
   useEffect(() => {

@@ -69,7 +69,7 @@ export const Layout = () => {
   shadow-purple
    md:border-solid"
     >
-      <div className="relative  h-screen overflow-y-auto app-container">
+      <div className="relative  h-svh overflow-y-auto app-container">
         <div className="relative  z-[1001] h-15 background-app flex items-center justify-between border-app p-3 ">
           <div className="w-10 flex items-center justify-center">
             {!isSidebarOpen && (
