@@ -49,7 +49,7 @@ const CallingInterface = () => {
       const greetSpeech = new SpeechSynthesisUtterance(greeting);
       greetSpeech.lang = "en-US";
       greetSpeech.pitch = 1.9;
-      greetSpeech.rate = 1.2;
+      greetSpeech.rate = 1;
 
       setIsGreeting(true);
       setStatusMessage("Speaking...");
