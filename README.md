@@ -21,7 +21,7 @@ A futuristic voice-powered portfolio that lets users talk to me and hear AI-powe
 
 ## 🧰 Tech Stack
 
-- **Frontend**: React + TypeScript + Tailwind CSS
+- **Frontend**: React + Tailwind CSS
 - **AI Integration**: OpenAI API (ChatGPT)
 - **Speech Recognition**: Web Speech API (`SpeechRecognition`)
 - **Text-to-Speech**: `SpeechSynthesis`
